@@ -1,1 +1,10 @@
-Simple Onigiri Fortune site. Upload contents to kimura-jane.github.io
+# かなたけ×木村のおにぎり占い
+
+手軽に “今日のあなたにぴったりのおにぎり” を占えるワンページサイト。  
+質問に答えると 6 タイプのオススメおにぎり & 今日の運勢が分かります。
+
+## 使い方
+1. リポジトリを fork / clone  
+2. 画像を / に配置（ファイル名はコードに合わせる）  
+3. GitHub Pages の **Source: main / (root)** を選択して保存  
+4. `https://<username>.github.io/` で公開完了！
