@@ -1,2 +1,1 @@
-# kimura-jane.github.io
-おにぎり占い
+Simple Onigiri Fortune site. Upload contents to kimura-jane.github.io

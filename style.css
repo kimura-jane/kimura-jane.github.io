@@ -1,0 +1,10 @@
+body{margin:0;text-align:center;background:#fffaf5;font-family:'YuGothic','Hiragino Kaku Gothic ProN',sans-serif;color:#333}
+.logo{width:130px;margin:20px auto 10px;display:block}
+.big{font-size:2rem;font-weight:bold}
+button{background:#f4a6ad;color:#fff;border:none;border-radius:6px;font-size:1.1rem;padding:12px 40px;cursor:pointer;margin:20px}
+button:hover{opacity:.8}
+.hidden{display:none}
+.q{margin:18px auto;text-align:left;max-width:600px}
+.q p{font-weight:bold;margin:0 0 6px}
+.q label{display:block;margin:4px 0}
+#resultImg{width:220px;margin:18px auto;display:block}
