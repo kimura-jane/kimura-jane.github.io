@@ -1,11 +1,79 @@
-const QUESTIONS=[{q:"いまの気分は？",a:["元気","普通","のんびり"]},{q:"ご飯は？",a:["しっかり味","プレーン","ほんのり"]},{q:"食感は？",a:["もちもち","サクッ","しっとり"]},{q:"食べたい具は？",a:["魚介系","肉系","変わり種"]},{q:"甘い・辛い？",a:["甘め","中間","ピリ辛"]}];
-const TYPES=[{n:"小松菜と炙り鮭チーズ",img:"01_komatsuna_aburishake_cheese.jpg",msg:"バランス派！"},
-{n:"山わさびとクリームチーズ",img:"02_yamawasabi_creamcheese.jpg",msg:"刺激とまろやか。"},
-{n:"ダブル昆布",img:"03_double_konbu.jpg",msg:"旨み二段重ね。"},
-{n:"梅きんぴらごぼう",img:"04_umekin_gobo.jpg",msg:"さっぱり爽快。"},
-{n:"大葉みそ",img:"05_ohba_miso.jpg",msg:"和の香り。"},
-{n:"じゃがいもとカレーそぼろ",img:"06_jagaimo_curry_soboro.jpg",msg:"ボリューム満点！"}];
-function makeQuiz(){const sec=document.getElementById('quizSection');QUESTIONS.forEach((q,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML=`<p>${i+1}. ${q.q}</p>`;q.a.forEach((t,j)=>{d.innerHTML+=`<label><input type="radio" name="q${i}" value="${j+1}" required> ${t}</label>`});sec.appendChild(d)});const b=document.createElement('button');b.textContent='診断 ▶';b.onclick=submitQuiz;sec.appendChild(b)}
-function submitQuiz(){let s=0;for(let i=0;i<QUESTIONS.length;i++){const el=document.querySelector(`input[name=q${i}]:checked`);if(!el){alert('全て回答してね');return;}s+=Number(el.value)}const idx=s<=6?0:s<=7?1:s<=8?2:s<=10?3:s<=12?4:5;const t=TYPES[idx];document.getElementById('resultTitle').textContent=`あなたは「${t.n}」タイプ！`;document.getElementById('resultImg').src=t.img;document.getElementById('resultMsg').textContent=t.msg;const star="★".repeat(1+Math.floor(Math.random()*5));document.getElementById('starLine').textContent=`今日の運勢: ${star}`;document.getElementById('luckyTaste').textContent=`ラッキー味: ${["しお","しょうゆ","みそ","ゆかり","ごま塩"][Math.floor(Math.random()*5)]}`;document.getElementById('luckyAction').textContent=`ラッキー行動: ${["深呼吸","散歩","ストレッチ","笑顔","新曲を聴く"][Math.floor(Math.random()*5)]}`;document.getElementById('quizSection').hidden=true;document.getElementById('resultSection').hidden=false}
-document.getElementById('startBtn').onclick=()=>{makeQuiz();document.getElementById('startBtn').parentNode.hidden=true;document.getElementById('quizSection').hidden=false}
-document.getElementById('againBtn').onclick=()=>location.reload();
+// --- 設問 --------------------------------------------------------------
+const QUESTIONS = [
+  { q: "いまの気分は？", a: ["がっつり‼", "さっぱり♪"] },
+  { q: "どちらかと言えば？", a: ["お肉派", "魚派"] },
+  { q: "海苔は…",           a: ["パリッ！", "しっとり◎"] },
+  { q: "いま食べたい具は？", a: ["王道",   "変わり種"] },
+  { q: "ひと言で言えば？",   a: ["元気いっぱい", "やさしい気分"] }
+];
+
+// --- 結果 6 タイプ ------------------------------------------------------
+const TYPES = [
+  { n:"小松菜と炙り鮭チーズ", img:"01_komatsuna_aburishake_cheese.jpg",
+    msg:"香ばしチーズでご褒美気分！", luck:"★★★", taste:"チーズ",
+    act:"とろける系フードを試す" },
+
+  { n:"山わさびとクリームチーズ", img:"02_yamawasabi_creamcheese.jpg",
+    msg:"ツン！ なのにクリーミー", luck:"★★", taste:"わさび",
+    act:"新しいスパイスに挑戦" },
+
+  { n:"ダブル昆布", img:"03_double_konbu.jpg",
+    msg:"ほっと落ち着く海の旨み", luck:"★★★★★", taste:"塩こんぶ",
+    act:"お茶タイムで一息" },
+
+  { n:"梅きんぴらごぼう", img:"04_umekin_gobo.jpg",
+    msg:"酸っぱ旨〜！メリハリ派", luck:"★★", taste:"梅",
+    act:"散歩でリフレッシュ" },
+
+  { n:"大葉みそ", img:"05_ohba_miso.jpg",
+    msg:"みそのコクと大葉のさわやかさ", luck:"★★★", taste:"みそ",
+    act:"グリーン系を取り入れる" },
+
+  { n:"じゃがいもとカレーそぼろ", img:"06_jagaimo_curry_soboro.jpg",
+    msg:"ボリューム満点、元気全開！", luck:"★", taste:"しょうゆ",
+    act:"ちょい辛フードを試す" }
+];
+
+// --- 質問フォーム生成 ----------------------------------------------------
+function makeQuiz () {
+  const sec = document.getElementById('app');
+  sec.innerHTML = QUESTIONS.map((q,i)=>`
+    <div class="qbox">
+      <p>${q.q}</p>
+      ${q.a.map((v,j)=>`
+        <label><input type="radio" name="q${i}" value="${j}" required> ${v}</label>
+      `).join('<br>')}
+    </div>
+  `).join('') + `<button id="submitBtn">占う ▶</button>`;
+  document.getElementById('submitBtn').onclick = submitQuiz;
+}
+
+// --- 回答 → 集計 → 結果表示 ------------------------------------------
+function submitQuiz () {
+  let score = 0;
+  QUESTIONS.forEach((_,i)=>{
+    const val = document.querySelector(`input[name="q${i}"]:checked`);
+    if(val) score += Number(val.value);
+  });
+  const idx = Math.round( score / (QUESTIONS.length-1) * (TYPES.length-1) );
+  showResult(TYPES[idx]);
+}
+
+function showResult(t){
+  const sec = document.getElementById('app');
+  sec.innerHTML = `
+    <div class="card">
+      <img src="${t.img}" alt="${t.n}">
+      <h2>あなたは『${t.n}』タイプ！</h2>
+      <p>${t.msg}</p>
+      <hr>
+      <p><strong>今日の運勢：</strong>${t.luck}</p>
+      <p><strong>ラッキー味：</strong>${t.taste}</p>
+      <p><strong>ラッキー行動：</strong>${t.act}</p>
+    </div>
+    <button id="againBtn">もう一度占う</button>`;
+  document.getElementById('againBtn').onclick = makeQuiz;
+}
+
+// --- 最初の画面 ---------------------------------------------------------
+document.getElementById('startBtn').onclick = makeQuiz;
