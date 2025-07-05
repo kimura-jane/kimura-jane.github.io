@@ -1,22 +1,44 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <title>かなたけ×木村のおにぎり占い</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>かなたけ×木村の おにぎり占い</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <header>
-    <img src="top_logo.jpg" alt="ロゴ" class="logo">
-    <h1>かなたけ×木村の<br><span class="sub">おにぎり占い</span></h1>
-  </header>
 
-  <main id="app">
-    <button id="startBtn">スタート ▶︎</button>
-  </main>
+<body>
+  <!-- ===== スタート画面 ===== -->
+  <section id="startScreen" class="center">
+    <img src="top_logo.jpg" alt="おにぎり屋かなたけロゴ" class="logo" />
+    <h1>かなたけ×木村の<br />おにぎり占い</h1>
+
+    <button id="startBtn" class="btn primary">スタート ▶</button>
+  </section>
+
+  <!-- ===== クイズ画面 ===== -->
+  <section id="quizScreen" style="display: none;">
+    <h2 id="questionText"></h2>
+    <ul id="choicesList" class="choice-list"></ul>
+    <button id="nextBtn" class="btn primary" style="display: none;">次へ ▶</button>
+  </section>
+
+  <!-- ===== 結果画面 ===== -->
+  <section id="resultScreen" style="display: none;">
+    <h2 id="resultTitle"></h2>
+    <img id="resultImg" class="result-img" />
+    <p id="resultDesc" class="result-desc"></p>
+
+    <hr />
+
+    <div id="todayFortune" class="fortune"></div>
+
+    <button id="retryBtn" class="btn">もう一度占う</button>
+  </section>
 
   <footer>&copy; 2025 かなたけ×木村</footer>
+
+  <!-- ロジック -->
   <script src="script.js"></script>
 </body>
 </html>
