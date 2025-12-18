@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.kanatake.app",
+      "sha256_cert_fingerprints": [
+        "CE:7E:CE:C4:F3:93:01:5F:3A:52:2D:AA:A2:22:88:AF:DB:A0:65:AE:B4:68:C9:D3:A8:0E:88:28:27:06:8F:A8"
+      ]
+    }
+  }
+]
