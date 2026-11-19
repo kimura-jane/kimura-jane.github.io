@@ -1,11 +1,26 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.kanatake.app",
       "sha256_cert_fingerprints": [
         "CE:7E:CE:C4:F3:93:01:5F:3A:52:2D:AA:A2:22:88:AF:DB:A0:65:AE:B4:68:C9:D3:A8:0E:88:28:27:06:8F:A8"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.jomonpix.app",
+      "sha256_cert_fingerprints": [
+        "45:25:C0:DA:61:AB:2B:73:22:A5:9C:79:AB:6A:F7:1C:CA:44:6E:F0:38:9A:EA:DC:46:A0:82:6C:47:F2:92:CE",
+        "54:CF:3E:35:C5:51:3D:64:0D:E3:54:9C:F1:5B:CD:07:1C:C4:06:51:F5:BE:20:8D:F7:1A:C6:C8:E1:D1:B2:E4"
       ]
     }
   }
